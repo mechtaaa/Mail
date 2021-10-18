@@ -1,9 +1,24 @@
 package org.example;
 
-import org.testng.Assert;
+import io.qameta.allure.Step;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class TestMail extends Settings {
+public class TestMail extends BaseTest  {
+    public static WebDriver driver;
+    public PageMail pageMail;
+    public StartPageMail startPageMail;
+
+    @BeforeTest
+    public void setUp() {
+        BaseTest baseTest = new BaseTest();
+        baseTest.initialize();
+        driver = getDriver();
+        driver.get("https://www.google.com/");
+    }
+
+    @Step("Проверка на колличество писем")
     @Test
     public void firstTaskTest() throws InterruptedException {
         startPageMail = new StartPageMail(driver);
@@ -20,8 +35,7 @@ public class TestMail extends Settings {
         pageMail.writeWhom("azov123azov@gmail.com");
         pageMail.writeTopic("Simbirsoft theme");
         pageMail.writeText("Найдено " + startPageMail.getNumber() + " писемо\\ьма");
-        int nextNumber = startPageMail.getNumber();
         pageMail.clickSendMail();
-        Assert.assertTrue(startPageMail.getNumberTwo(nextNumber)>nextNumber);
+        startPageMail.resultAssert();
     }
 }
