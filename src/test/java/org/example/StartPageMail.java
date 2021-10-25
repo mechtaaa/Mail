@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class StartPageMail {
     public WebDriver driver;
@@ -51,9 +52,15 @@ public class StartPageMail {
         int  number = driver.findElements(By.xpath("//span[contains(text(), 'Simbirsoft theme')]")).size();
         return number;
     }
+
     public int getNumberTwo(int number){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan((By.xpath("//span[contains(text(), 'Simbirsoft theme')]")), number));
         return getNumber();
+    }
+
+    public void resultAssert(){
+        int nextNumber = getNumber();
+        Assert.assertTrue(getNumberTwo(nextNumber)<nextNumber);
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class PageMail {
 
     public WebDriver driver;
+
     public PageMail(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -25,15 +26,19 @@ public class PageMail {
     @FindBy(xpath = "//div[text()='Отправить']")
     WebElement sendMail;
 
-    public void writeWhom(String mail){ whom.sendKeys(mail); } // кому
+    public void writeWhom(String mail) {
+        whom.sendKeys(mail);
+    } // кому
 
-    public void writeTopic(String text){
+    public void writeTopic(String text) {
         topic.sendKeys(text);
     } // тема
 
-    public void writeText(String text){ letter.sendKeys(text); } //письмо
+    public void writeText(String text) {
+        letter.sendKeys(text);
+    } //письмо
 
-    public void clickSendMail(){
+    public void clickSendMail() {
         sendMail.click();
     } //нажать отправить
 }
